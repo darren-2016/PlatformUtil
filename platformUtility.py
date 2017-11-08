@@ -154,6 +154,50 @@ def RetrieveDataMessagesForTheDevice(timeFrom, timeTo, fieldset='simple'):
     DisplayJson(r.text)
 
 
+############################################################
+# Function:    RetrieveLatestDataMessagesForTheDevice
+# Description: 
+def RetrieveLatestDataMessagesForTheDevice(fieldset='simple'):
+    print "Retrieve latest data messages for the device:"
+    r = requests.get(baseUrl + '/device/' + deviceId + '/samples/last?fieldset=' + fieldset, headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+
+
+############################################################
+# Function:    RetrieveTimestampOfFirstReportedDataMessage
+# Description: 
+def RetrieveTimestampOfFirstReportedDataMessage():
+    print "Retrieve timestamp of the first reported data message:"
+    r = requests.get(baseUrl + '/device/' + deviceId + '/samples/firstdate', headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+
+
+############################################################
+# Function:    ReverseGeocodeAddress
+# Description: 
+def ReverseGeocodeAddress(latitude, longitude, locale):
+    print "Reverse geocode an address:"
+    r = requests.get(baseUrl + '/reverse_geocode?lat=' + str(latitude) + '&long=' + str(longitude) + '&locale=' + str(locale), headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+
+
+############################################################
+# Function:    GetListOfNotificationEvents
+# Description: 
+def GetListOfNotificationEvents():
+    print "Get list of notification events:"
+    r = requests.get(baseUrl + '/notification/event', headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+
+
 ##################################################
 #
 def main():
@@ -174,12 +218,15 @@ def main():
     ReadDeviceRecord()
 
     RetrieveDataMessagesForTheDevice('1510110935', '1510115935')
+    RetrieveLatestDataMessagesForTheDevice('extended')
+    RetrieveTimestampOfFirstReportedDataMessage()
 
+    # Geocoding
+    ReverseGeocodeAddress(51.510357, -0.116773, 'en')
 
+    GetListOfNotificationEvents()
 
-
-
-
+    
 
 
 if __name__ == '__main__':
