@@ -79,6 +79,8 @@ def GetAccountAssets(fieldset='simple'):
 ##################################################
 #
 def main():
+    print 'Platform Utility'
+    
     GetListOfAccountsDevices('extended')
     GetListOfAccountsNotifications()
     GetListOfMapProviders()
