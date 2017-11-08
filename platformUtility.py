@@ -1,11 +1,10 @@
-
-# Platform Connect API Example
+############################################################
+# Platform API Example Utility
 
 import requests
 import json
 import credentials
 
-print "Platform Connect API"
 
 baseUrl = 'https://api.gpsengine.net/v1'
 apiKey = credentials.apiKey
@@ -13,7 +12,7 @@ accountId = credentials.accountId
 deviceId = credentials.deviceId
 authHeader = {'Authorization': 'JWT ' + apiKey}
 
-##################################################
+############################################################
 # Function:    DisplayJson
 # Description: Display the string in JSONN pretty 
 #              print style.
@@ -22,7 +21,7 @@ def DisplayJson(str):
     print json.dumps(jsonString, indent=4)
 
 
-##################################################
+############################################################
 # Function:    GetListOfAccountsDevices
 # Description: 
 def GetListOfAccountsDevices(fieldset='simple'):
@@ -33,7 +32,7 @@ def GetListOfAccountsDevices(fieldset='simple'):
     DisplayJson(r.text)
 
 
-##################################################
+############################################################
 # Function:    GetListOfAccountsNotifications
 # Description: 
 def GetListOfAccountsNotifications(fieldset='simple'):
@@ -44,7 +43,7 @@ def GetListOfAccountsNotifications(fieldset='simple'):
     DisplayJson(r.text)
 
 
-##################################################
+############################################################
 # Function:    GetListOfMapProviders
 # Description: 
 def GetListOfMapProviders():
@@ -55,7 +54,7 @@ def GetListOfMapProviders():
     DisplayJson(r.text)
 
 
-##################################################
+############################################################
 # Function:    GetListOfUsersAssociatedWithAccount
 # Description: 
 def GetListOfUsersAssociatedWithAccount():
@@ -66,7 +65,7 @@ def GetListOfUsersAssociatedWithAccount():
     DisplayJson(r.text)
 
 
-##################################################
+############################################################
 # Function:    GetAccountAssets
 # Description: 
 def GetAccountAssets(fieldset='simple'):
@@ -77,7 +76,7 @@ def GetAccountAssets(fieldset='simple'):
     DisplayJson(r.text)
     
 
-##################################################
+############################################################
 # Function:    GetAccountInfo
 # Description: 
 def GetAccountInfo(fieldset='simple'):
@@ -88,7 +87,7 @@ def GetAccountInfo(fieldset='simple'):
     DisplayJson(r.text)
     
 
-##################################################
+############################################################
 # Function:    GetListOfDeviceNotifications
 # Description: 
 def GetListOfDeviceNotifications():
@@ -99,7 +98,7 @@ def GetListOfDeviceNotifications():
     DisplayJson(r.text)
     
 
-##################################################
+############################################################
 # Function:    GetListOfSupportedDeviceVendorsAndModels
 # Description: 
 def GetListOfSupportedDeviceVendorsAndModels(fieldset='simple'):
@@ -110,7 +109,7 @@ def GetListOfSupportedDeviceVendorsAndModels(fieldset='simple'):
     DisplayJson(r.text)
     
 
-##################################################
+############################################################
 # Function:    GetProvisioningState
 # Description: 
 def GetProvisioningState():
@@ -121,7 +120,7 @@ def GetProvisioningState():
     DisplayJson(r.text)
 
 
-##################################################
+############################################################
 # Function:    GetSentCommands
 # Description: 
 def GetSentCommands():
@@ -132,7 +131,7 @@ def GetSentCommands():
     DisplayJson(r.text)
     
     
-##################################################
+############################################################
 # Function:    GetSentCommands
 # Description: 
 def ReadDeviceRecord():
@@ -143,7 +142,7 @@ def ReadDeviceRecord():
     DisplayJson(r.text)
 
 
-##################################################
+############################################################
 # Function:    RetrieveDataMessagesForTheDevice
 # Description: 
 def RetrieveDataMessagesForTheDevice(timeFrom, timeTo, fieldset='simple'):
@@ -198,11 +197,12 @@ def GetListOfNotificationEvents():
     DisplayJson(r.text)
 
 
-##################################################
+############################################################
 #
 def main():
     print 'Platform Utility'
 
+    # Accounts
     GetListOfAccountsDevices('extended')
     GetListOfAccountsNotifications()
     GetListOfMapProviders()
@@ -210,13 +210,12 @@ def main():
     GetAccountAssets()
     GetAccountInfo()
 
+    # Devices
     GetListOfDeviceNotifications()
     GetListOfSupportedDeviceVendorsAndModels()
     GetProvisioningState()
     GetSentCommands()
-
     ReadDeviceRecord()
-
     RetrieveDataMessagesForTheDevice('1510110935', '1510115935')
     RetrieveLatestDataMessagesForTheDevice('extended')
     RetrieveTimestampOfFirstReportedDataMessage()
@@ -224,6 +223,7 @@ def main():
     # Geocoding
     ReverseGeocodeAddress(51.510357, -0.116773, 'en')
 
+    # Notifications
     GetListOfNotificationEvents()
 
     
