@@ -144,6 +144,17 @@ def ReadDeviceRecord():
 
 
 ##################################################
+# Function:    RetrieveDataMessagesForTheDevice
+# Description: 
+def RetrieveDataMessagesForTheDevice(timeFrom, timeTo, fieldset='simple'):
+    print "Retrieve data messages for the device:"
+    r = requests.get(baseUrl + '/device/' + deviceId + '/samples?from=' + str(timeFrom) + '&to=' + str(timeTo) + '&fieldset=' + fieldset, headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+
+
+##################################################
 #
 def main():
     print 'Platform Utility'
@@ -161,6 +172,8 @@ def main():
     GetSentCommands()
 
     ReadDeviceRecord()
+
+    RetrieveDataMessagesForTheDevice('1510110935', '1510115935')
 
 
 
