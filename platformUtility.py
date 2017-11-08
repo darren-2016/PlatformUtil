@@ -10,6 +10,7 @@ print "Platform Connect API"
 baseUrl = 'https://api.gpsengine.net/v1'
 apiKey = credentials.apiKey
 accountId = credentials.accountId
+deviceId = credentials.deviceId
 authHeader = {'Authorization': 'JWT ' + apiKey}
 
 ##################################################
@@ -69,7 +70,7 @@ def GetListOfUsersAssociatedWithAccount():
 # Function:    GetAccountAssets
 # Description: 
 def GetAccountAssets(fieldset='simple'):
-    print "Get account assets::"
+    print "Get account assets:"
     r = requests.get(baseUrl + '/account/' + accountId + '/asset', headers=authHeader)
     print '> ' + r.url
     print '> ' + str(r)
@@ -77,15 +78,93 @@ def GetAccountAssets(fieldset='simple'):
     
 
 ##################################################
+# Function:    GetAccountInfo
+# Description: 
+def GetAccountInfo(fieldset='simple'):
+    print "Get account info:"
+    r = requests.get(baseUrl + '/account/' + accountId + '?fieldset=' + fieldset, headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+    
+
+##################################################
+# Function:    GetListOfDeviceNotifications
+# Description: 
+def GetListOfDeviceNotifications():
+    print "Get a list of device notifications:"
+    r = requests.get(baseUrl + '/device/' + deviceId + '/notification', headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+    
+
+##################################################
+# Function:    GetListOfSupportedDeviceVendorsAndModels
+# Description: 
+def GetListOfSupportedDeviceVendorsAndModels(fieldset='simple'):
+    print "Get a list of supported device vendors and models:"
+    r = requests.get(baseUrl + '/vendors' + '?fieldset=' + fieldset, headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+    
+
+##################################################
+# Function:    GetProvisioningState
+# Description: 
+def GetProvisioningState():
+    print "Get provisioning state:"
+    r = requests.get(baseUrl + '/device/' + deviceId + '/provision', headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+
+
+##################################################
+# Function:    GetSentCommands
+# Description: 
+def GetSentCommands():
+    print "Get sent commands:"
+    r = requests.get(baseUrl + '/device/' + deviceId + '/command', headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+    
+    
+##################################################
+# Function:    GetSentCommands
+# Description: 
+def ReadDeviceRecord():
+    print "Read device record:"
+    r = requests.get(baseUrl + '/device/' + deviceId, headers=authHeader)
+    print '> ' + r.url
+    print '> ' + str(r)
+    DisplayJson(r.text)
+
+
+##################################################
 #
 def main():
     print 'Platform Utility'
-    
+
     GetListOfAccountsDevices('extended')
     GetListOfAccountsNotifications()
     GetListOfMapProviders()
     GetListOfUsersAssociatedWithAccount()
     GetAccountAssets()
+    GetAccountInfo()
+
+    GetListOfDeviceNotifications()
+    GetListOfSupportedDeviceVendorsAndModels()
+    GetProvisioningState()
+    GetSentCommands()
+
+    ReadDeviceRecord()
+
+
+
+
 
 
 
